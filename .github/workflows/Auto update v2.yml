@@ -361,7 +361,7 @@ jobs:
         id: update
         if: steps.check.outputs.status == 'success' && steps.check.outputs.New_PKG_VERSION != '' && !cancelled()
         run: |
-          cd && cd work/wall/wall/${{ matrix.folder }}
+          cd && cd work/Moll/Moll/${{ matrix.folder }}
           New_PKG_VERSION=${{ steps.check.outputs.New_PKG_VERSION }}
           sed -i "${{ matrix.version_line }}c ${{ matrix.version_head }}$New_PKG_VERSION" Makefile
           cd && cd main && mkdir -p ${{ matrix.pakcages }} && cd ${{ matrix.pakcages }}
@@ -369,7 +369,7 @@ jobs:
           file_name=${{ matrix.file_name }}
           is_v=$(echo ${{ matrix.release_download_url }} | awk -F/ '{print $NF}')
           if [ ! -n "${{ matrix.file_name }}" ]; then PKG_HASH=$(sha256sum $is_v$New_PKG_VERSION) && PKG_HASH=${PKG_HASH%% *}; else PKG_HASH=$(sha256sum ${file_name##*/}) && PKG_HASH=${PKG_HASH%% *}; fi;
-          cd && cd work/wall/wall/${{ matrix.folder }} 
+          cd && cd work/Moll/Moll/${{ matrix.folder }} 
           sed -i "${{ matrix.hash_line }}c ${{ matrix.hash_head }}$PKG_HASH" Makefile
           echo "已更新${{ matrix.pakcages }}版本到: $New_PKG_VERSION"
           echo "${{ matrix.pakcages }} Hash:$PKG_HASH"
